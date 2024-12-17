@@ -5,6 +5,8 @@ import Card from "./Card";
 function Main() {
   const [dolce, setDolce] = useState(dolciItaliani);
   const [titolo, setTitolo] = useState("");
+
+  // funzione per agguingere un nuovo elemento all array
   function handleSubmit(event) {
     event.preventDefault();
     // agguingo un nuovo dolce
@@ -14,15 +16,22 @@ function Main() {
       titolo: titolo,
       paragrafo: "Nuovo dolce aggiunto",
     };
-    // agguingo il nuovo elemento
+    // aggiorno il mio nuovo array aggiungendo il nuovo elemento
     setDolce([...dolce, nuovoDolce]);
+  }
+  // funzione per eliminare un elemento dall array
+  function deleteItem(id) {
+    setDolce(dolce.filter((element) => element.id != id));
   }
   return (
     <main className="container-fluid">
       <div className="box">
-        {dolce.map((dolceelement) => (
-          <div className="gap-5" key={dolceelement.id}>
-            <Card dolciItaliani={dolceelement} />
+        {dolce.map((dolceElement) => (
+          <div className="gap-5" key={dolceElement.id}>
+            <Card
+              dolciItaliani={dolceElement}
+              onDelete={() => deleteItem(dolceElement.id)}
+            />
           </div>
         ))}
       </div>
@@ -41,8 +50,9 @@ function Main() {
               onChange={(e) => setTitolo(e.target.value)}
             />
           </div>
+
           <button type="submit" className="btn btn-primary">
-            Aggiungi
+            ADD
           </button>
         </form>
       </section>
