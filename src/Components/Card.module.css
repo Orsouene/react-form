@@ -1,0 +1,7 @@
+.effect {
+  cursor: pointer;
+}
+
+.effect:hover {
+  scale: 1.2;
+}
